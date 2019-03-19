@@ -1,7 +1,6 @@
 #Исходные данные
 list_user = {}
 registr_user = {}
-
 #Функции
 def vivod_user():
     if len(list_user) == 0:
