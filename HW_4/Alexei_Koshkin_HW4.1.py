@@ -1,9 +1,8 @@
-#Функции
-def menu_user():
-    print('Доступные команды: \n 1 - вывести список пользователей \n 2 - добавить пользователя \n 3 - удалить пользователя \n 4 - выбрать пользователя \n 5 - выход')
-    var = int(input('Выберите команду: '))
-    return var
+#Исходные данные
+list_user = {}
+registr_user = {}
 
+#Функции
 def vivod_user():
     if len(list_user) == 0:
             print('Список пуст')
@@ -74,34 +73,44 @@ def cho_user():
         m = float(input('Вес в килограммах: '))
         list_user.update({n: {'vozrast': v,'pol': p, 'hieght': h, 'massa': m}})
 
-#Исходные данные
-list_user = {}
+def login_required(fn):
+    def wrapper():
+        if registr_user:
+            fn()
+        else:
+            print('Авторизуйтесь')
+            login = input('Логин: ')
+            password = input('Пароль: ')
+            registr_user[login] = password
+            fn()      
+    return wrapper()
 
-#Цикличность программы
-k = 0
-while k != 1:
-    #Выбор
-    var = menu_user()                                 
-    #print('Доступные команды: \n 1 - вывести список пользователей \n 2 - добавить пользователя \n 3 - удалить пользователя \n 4 - выбрать пользователя \n 5 - выход')
-    #var = int(input('Выберите команду: '))
 
+
+@login_required
+def menu_user():
+    k = 0
+    while k != 5:
+        print('Доступные команды: \n 1 - вывести список пользователей \n 2 - добавить пользователя \n 3 - удалить пользователя \n 4 - выбрать пользователя \n 5 - выход')
+        var = int(input('Выберите команду: '))
     #1 - вывести список пользователей
-    if var == 1:
-        vivod_user()
+        if var == 1:
+            vivod_user()
         
     #2 - добавить пользователя      
-    elif var == 2:
-        add_user()
+        elif var == 2:
+            add_user()
         
     #3 - удалить пользователя
-    elif var == 3:
-        del_user()
+        elif var == 3:
+            del_user()
            
     #4 - выбрать пользователя
-    elif var == 4:
-        cho_user()
+        elif var == 4:
+            cho_user()
 
     #5 - выход
-    elif var == 5:
-        k = 1
+        elif var == 5:
+            k = 5
+                           
 print('Завершение')
