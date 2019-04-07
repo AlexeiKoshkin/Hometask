@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Book(models.Model):
     name = models.CharField(
         "Название книги",
@@ -8,10 +10,10 @@ class Book(models.Model):
         blank=True,
         max_length=200
     )
-    #image = models.ImageField(
-        #"Обложка",
-        #upload_to=None
-    #)
+#   image = models.ImageField(
+#        "Обложка",
+#        upload_to=None
+#    )
     price = models.DecimalField(
         "Цена",
         max_digits=8,
@@ -67,7 +69,7 @@ class Book(models.Model):
     )
     available = models.BooleanField(
         "Доступна для заказа",
-        default =True
+        default=True
     )
     rating = models.FloatField(
         "Рейтинг"
@@ -82,10 +84,10 @@ class Book(models.Model):
         auto_now=True,
         auto_now_add=False
     )
-    
+
     def __str__(self):
         return self.name
-     
+
     class Meta:
         verbose_name = "Книга"
         verbose_name_plural = "Книги"
