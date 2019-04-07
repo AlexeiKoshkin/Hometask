@@ -12,7 +12,7 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
-class Series(models.Model):
+class Serie(models.Model):
     name = models.CharField('Название', max_length = 30)
     description = models.TextField('Описание')
 
