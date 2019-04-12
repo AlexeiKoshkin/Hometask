@@ -6,8 +6,6 @@ from django.db import models
 class Book(models.Model):
     name = models.CharField(
         "Название книги",
-        null=True,
-        blank=True,
         max_length=200
     )
 #   image = models.ImageField(
@@ -20,19 +18,20 @@ class Book(models.Model):
         decimal_places=2
     )
     authors = models.ManyToManyField(
-        "reference.Author"
+        "reference.Author",
+        related_name="Book"
     )
     serie = models.ForeignKey(
         "reference.Serie",
         verbose_name="Серия",
         on_delete=models.CASCADE,
-        related_name="books"
+        related_name="Book"
     )
     genre = models.ForeignKey(
         "reference.Genre",
         verbose_name="Жанр",
         on_delete=models.CASCADE,
-        related_name="books"
+        related_name="Book"
     )
     issue_year = models.IntegerField(
         "Год издания"
@@ -62,7 +61,7 @@ class Book(models.Model):
     publisher = models.ForeignKey(
         "reference.Publisher",
         on_delete=models.CASCADE,
-        related_name="books"
+        related_name="Book"
     )
     num_book = models.IntegerField(
         "Количество книг в наличии"
