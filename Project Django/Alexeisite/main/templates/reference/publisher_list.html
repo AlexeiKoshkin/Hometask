@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+    <table border="1">
+    {% for object in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'publisher_detail_view' object.pk %}">
+                {{ object.name }}</a>
+            </td>
+            <td>{{object.description}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
+
