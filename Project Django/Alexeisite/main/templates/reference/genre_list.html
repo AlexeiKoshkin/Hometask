@@ -7,6 +7,10 @@
 	<title>Document</title>
 </head>
 <body>
+    <form action="", method="get">
+        {{ form }}
+        <button type="submit">Поиск</button>
+    </form>
     <table border="1">
     {% for object in object_list %}
         <tr>
