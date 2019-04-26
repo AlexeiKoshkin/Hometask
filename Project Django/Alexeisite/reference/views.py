@@ -1,8 +1,12 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from reference.models import Author, Serie, Genre, Publisher
-from reference.forms import SearchForm
+from reference.forms import *
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 
@@ -96,3 +100,107 @@ class PublisherList(ListView):
 
 class ReferenceVeiw(TemplateView):
     template_name = 'reference/reference.html'
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    form_class = AuthorForm
+    template_name = 'reference/create_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('author_detail_view',
+                                kwargs={'pk': self.object.pk})
+        elif self.request.POST.get('list'):
+            return reverse_lazy('author_list_view')
+        return reverse_lazy('author_create_view')
+
+
+class SerieCreate(CreateView):
+    model = Serie
+    form_class = SerieForm
+    template_name = 'reference/create_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('serie_detail_view',
+                                kwargs={'pk': self.object.pk})
+        elif self.request.POST.get('list'):
+            return reverse_lazy('serie_list_view')
+        return reverse_lazy('serie_create_view')
+
+
+class GenreCreate(CreateView):
+    model = Genre
+    form_class = GenreForm
+    template_name = 'reference/create_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('genre_detail_view',
+                                kwargs={'pk': self.object.pk})
+        elif self.request.POST.get('list'):
+            return reverse_lazy('genre_list_view')
+        return reverse_lazy('genre_create_view')
+
+
+class PublisherCreate(CreateView):
+    model = Publisher
+    form_class = PublisherForm
+    template_name = 'reference/create_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('publisher_detail_view',
+                                kwargs={'pk': self.object.pk})
+        elif self.request.POST.get('list'):
+            return reverse_lazy('publisher_list_view')
+        return reverse_lazy('publisher_create_view')
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    form_class = AuthorForm
+    template_name = 'reference/update_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('author_detail_view',
+                                kwargs={'pk': self.object.pk})
+        return reverse_lazy('author_list_view')
+
+
+class SerieUpdate(UpdateView):
+    model = Serie
+    form_class = SerieForm
+    template_name = 'reference/update_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('serie_detail_view',
+                                kwargs={'pk': self.object.pk})
+        return reverse_lazy('serie_list_view')
+
+
+class GenreUpdate(UpdateView):
+    model = Genre
+    form_class = GenreForm
+    template_name = 'reference/update_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('genre_detail_view',
+                                kwargs={'pk': self.object.pk})
+        return reverse_lazy('genre_list_view')
+
+
+class PublisherUpdate(UpdateView):
+    model = Publisher
+    form_class = PublisherForm
+    template_name = 'reference/update_form.html'
+
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('publisher_detail_view',
+                                kwargs={'pk': self.object.pk})
+        return reverse_lazy('publisher_list_view')
