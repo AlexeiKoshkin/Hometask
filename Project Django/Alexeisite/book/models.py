@@ -1,17 +1,17 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Book(models.Model):
     name = models.CharField(
         "Название книги",
         max_length=200
     )
-#   image = models.ImageField(
-#        "Обложка",
-#        upload_to=None
-#    )
+    image = models.ImageField(
+        "Обложка",
+        blank=True,
+        null=True,
+        upload_to="img"
+    )
     price = models.DecimalField(
         "Цена",
         max_digits=8,
@@ -19,6 +19,7 @@ class Book(models.Model):
     )
     authors = models.ManyToManyField(
         "reference.Author",
+        verbose_name="Автор",
         related_name="Book"
     )
     serie = models.ForeignKey(
@@ -60,6 +61,7 @@ class Book(models.Model):
     )
     publisher = models.ForeignKey(
         "reference.Publisher",
+        verbose_name="Издательство",
         on_delete=models.CASCADE,
         related_name="Book"
     )

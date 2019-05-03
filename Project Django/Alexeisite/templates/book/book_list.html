@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Book List</title>
+</head>
+<body>
+    <form action="", method="get">
+        {{ form }}
+        <button type="submit">Поиск</button>
+    </form>
+    <a href="{% url 'book_create_view' %}">Создать новую книгу</a>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Название</th><th>Действия</th>
+        </tr>
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'book_detail_view' object.pk %}">
+                {{ object.pk }}</a>
+            </td>
+            <td>{{object.name}}</td>
+            <td>
+                <a href="{% url "book_detail_view" object.pk %}">Детали</a>
+                <a href="{% url "book_update_view" object.pk %}">Обновить</a>
+                <a href="{% url "book_delete_view" object.pk %}">Удалить</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

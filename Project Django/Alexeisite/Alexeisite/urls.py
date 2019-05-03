@@ -15,49 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from reference.models import *
-from reference.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
      path('admin/', admin.site.urls),
-
-     path('reference/author/<int:pk>', AuthorDetail.as_view(),
-          name='author_detail_view'),
-     path('reference/serie/<int:pk>', SerieDetail.as_view(),
-          name='serie_detail_view'),
-     path('reference/genre/<int:pk>', GenreDetail.as_view(),
-          name='genre_detail_view'),
-     path('reference/publisher/<int:pk>', PublisherDetail.as_view(),
-          name='publisher_detail_view'),
-
-     path('reference/author/', AuthorList.as_view(),
-          name='author_list_view'),
-     path('reference/serie/', SerieList.as_view(),
-          name='serie_list_view'),
-     path('reference/genre/', GenreList.as_view(),
-          name='genre_list_view'),
-     path('reference/publisher/', PublisherList.as_view(),
-          name='publisher_list_view'),
-
-     path('reference/author/create/', AuthorCreate.as_view(),
-          name='author_create_view'),
-     path('reference/serie/create/', SerieCreate.as_view(),
-          name='serie_create_view'),
-     path('reference/genre/create/', GenreCreate.as_view(),
-          name='genre_create_view'),
-     path('reference/publisher/create/', PublisherCreate.as_view(),
-          name='publisher_create_view'),
-
-     path('reference/author/update/<int:pk>', AuthorUpdate.as_view(),
-          name='author_update_view'),
-     path('reference/serie/update/<int:pk>', SerieUpdate.as_view(),
-          name='serie_update_view'),
-     path('reference/genre/update/<int:pk>', GenreUpdate.as_view(),
-          name='genre_update_view'),
-     path('reference/publisher/update<int:pk>', PublisherUpdate.as_view(),
-          name='publisher_update_view'),
-
-     path('reference/', ReferenceVeiw.as_view()),
+     path('book/', include('book.urls')),
+     path('reference/', include('reference.urls')),
      path('main/', include('main.urls')),
      path('contacts/', include('contacts.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

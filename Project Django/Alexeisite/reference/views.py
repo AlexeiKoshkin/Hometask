@@ -3,11 +3,16 @@ from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 from reference.models import Author, Serie, Genre, Publisher
 from reference.forms import *
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
+class ReferenceVeiw(TemplateView):
+    template_name = 'reference/reference.html'
 
 
 class AuthorDetail(DetailView):
@@ -96,10 +101,6 @@ class PublisherList(ListView):
         f = SearchForm()
         context["form"] = f
         return context
-
-
-class ReferenceVeiw(TemplateView):
-    template_name = 'reference/reference.html'
 
 
 class AuthorCreate(CreateView):
@@ -204,3 +205,27 @@ class PublisherUpdate(UpdateView):
             return reverse_lazy('publisher_detail_view',
                                 kwargs={'pk': self.object.pk})
         return reverse_lazy('publisher_list_view')
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('author_list_view')
+    template_name = 'reference/delete_form.html'
+
+
+class SerieDelete(DeleteView):
+    model = Serie
+    success_url = reverse_lazy('serie_list_view')
+    template_name = 'reference/delete_form.html'
+
+
+class GenreDelete(DeleteView):
+    model = Genre
+    success_url = reverse_lazy('genre_list_view')
+    template_name = 'reference/delete_form.html'
+
+
+class PublisherDelete(DeleteView):
+    model = Publisher
+    success_url = reverse_lazy('publisher_list_view')
+    template_name = 'reference/delete_form.html'

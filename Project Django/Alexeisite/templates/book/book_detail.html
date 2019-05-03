@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Book Detail</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Название:</th><th>{{ object.name }}</th>
+        </tr>
+        <tr>
+            <td>Цена:</td><td>{{ object.price }}</td>
+        </tr>
+        <tr>
+            <td>Обложка:</td>
+            <td>
+                <img src="{{ object.image.url }}" alt="Нет изображения">
+            </td>
+        </tr>
+        <tr>
+            <td>Автор:</td>
+            <td>{% for name in object.authors.all %}
+                {{ name }} <br>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Серия:</td><td>{{ object.serie }}</td>
+        </tr>
+        <tr>
+            <td>Жанр:</td><td>{{ object.genre }}</td>
+        </tr>
+        <tr>
+            <td>Год издания:</td><td>{{ object.issue_year }}</td>
+        </tr>
+        <tr>
+            <td>Страниц:</td><td>{{ object.page }}</td>
+        </tr>
+        <tr>
+            <td>Переплет:</td><td>{{ object.binding }}</td>
+        </tr>
+        <tr>
+            <td>Формат:</td><td>{{ object.size }}</td>
+        </tr>
+        <tr>
+            <td>ISBN:</td><td>{{ object.isbn }}</td>
+        </tr>
+        <tr>
+            <td>Вес:</td><td>{{ object.weight }}</td>
+        </tr>
+        <tr>
+            <td>Возрастные ораничения:</td><td>{{ object.age_rest }}</td>
+        </tr>
+        <tr>
+            <td>Издательство:</td><td>{{ object.publisher }}</td>
+        </tr>
+        <tr>
+            <td>Количество книг в наличии:</td><td>{{ object.num_book }}</td>
+        </tr>
+        <tr>
+            <td>Доступна для заказа:</td><td>{{ object.available }}</td>
+        </tr>
+        <tr>
+            <td>Рейтинг:</td><td>{{ object.rating }}</td>
+        </tr>
+        <tr>
+            <td>Дата создания:</td><td>{{ object.created_date }}</td>
+        </tr>
+        <tr>
+            <td>Дата изменения:</td><td>{{ object.update_date }}</td>
+        </tr>
+    </table>
+</body>
+</html>
