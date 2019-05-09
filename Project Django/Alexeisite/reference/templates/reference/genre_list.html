@@ -1,0 +1,28 @@
+{% extends "base_list.html" %}
+
+{% block title %}Genre List{% endblock %}
+
+{% block href %}href="{% url 'genre_create_view' %}">Создать новый жанр{% endblock %}
+
+{% block thead %}
+<tr>
+    <th scope="col">Название</th>
+    <th scope="col">Действия</th>
+</tr>
+{% endblock %}
+
+{% block tbody %} 
+{% for object in object_list %}
+<tr>
+    <td>
+        <a href="{% url 'genre_detail_view' object.pk %}">
+        {{ object.name }}</a>
+    </td>
+    <td>
+        <a href="{% url "genre_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+        <a href="{% url "genre_update_view" object.pk %}"><i class="fas fa-pen-square"></i></a>
+        <a href="{% url "genre_delete_view" object.pk %}"><i class="fas fa-trash-alt"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}

@@ -22,7 +22,7 @@ class SerieForm(ModelForm):
 class GenreForm(ModelForm):
     class Meta:
         model = Genre
-        fields = ('name',)
+        fields = ('name', 'description')
 
 
 class PublisherForm(ModelForm):

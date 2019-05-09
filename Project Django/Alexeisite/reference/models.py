@@ -27,6 +27,7 @@ class Serie(models.Model):
 
 class Genre(models.Model):
     name = models.CharField('Название', max_length=30)
+    description = models.TextField('Описание', blank=True, null=True)
 
     def __str__(self):
         return self.name

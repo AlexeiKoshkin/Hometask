@@ -1,0 +1,28 @@
+{% extends "base_list.html" %}
+
+{% block title %}Publisher List{% endblock %}
+
+{% block href %}href="{% url 'publisher_create_view' %}">Создать новое издательство{% endblock %}
+
+{% block thead %}
+<tr>
+    <th scope="col">Название</th>
+    <th scope="col">Действия</th>
+</tr>
+{% endblock %}
+
+{% block tbody %} 
+{% for object in object_list %}
+<tr>
+    <td>
+        <a href="{% url 'publisher_detail_view' object.pk %}">
+        {{ object.name }}</a>
+    </td>
+    <td>
+        <a href="{% url "publisher_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+        <a href="{% url "publisher_update_view" object.pk %}"><i class="fas fa-pen-square"></i></a>
+        <a href="{% url "publisher_delete_view" object.pk %}"><i class="fas fa-trash-alt"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}

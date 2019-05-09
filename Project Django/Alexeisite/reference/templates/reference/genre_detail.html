@@ -1,0 +1,23 @@
+{% extends "base_detail.html" %}
+
+{% block title %}Genre Detail{% endblock %}
+
+{% block href %}href="{% url 'genre_list_view' %}"{% endblock %}
+
+{% block thead %}
+<tr>
+    <th scope="col">Название</th>
+    <th scope="col">Описание</th>
+</tr>
+{% endblock %}
+
+{% block tbody %}   
+<tr>
+    <td>
+        {{ object.name }}
+    </td>
+    <td>
+        {{ object.description }}
+    </td>
+</tr>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base_detail.html" %}
+
+{% block title %}Author Detail{% endblock %}
+
+{% block href %}href="{% url 'author_list_view' %}"{% endblock %}
+
+{% block thead %}
+<tr>
+    <th scope="col">Имя</th>
+    <th scope="col">Фамилия</th>
+</tr>
+{% endblock %}
+
+{% block tbody %}   
+<tr>
+    <td>
+        {{ object.first_name }}
+    </td>
+    <td>
+        {{ object.last_name }}
+    </td>
+</tr>
+{% endblock %}
