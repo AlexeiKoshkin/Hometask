@@ -14,7 +14,7 @@
     <a href="{% url 'book_create_view' %}">Создать новую книгу</a>
     <table border="1">
         <tr>
-            <th>ID</th><th>Название</th><th>Действия</th>
+            <th>ID</th><th>Название</th><th>№</th><th>Действия</th>
         </tr>
         {% for object in object_list %}
         <tr>
@@ -23,6 +23,9 @@
                 {{ object.pk }}</a>
             </td>
             <td>{{object.name}}</td>
+            <td>
+                <a href="{% url "add_book_to_cart" object.pk %}">Добавить в карзину</a>
+            </td>
             <td>
                 <a href="{% url "book_detail_view" object.pk %}">Детали</a>
                 <a href="{% url "book_update_view" object.pk %}">Обновить</a>
