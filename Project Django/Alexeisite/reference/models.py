@@ -47,3 +47,14 @@ class Publisher(models.Model):
     class Meta:
         verbose_name = 'Издательство'
         verbose_name_plural = 'Издательства'
+
+
+class OrderStatus(models.Model):
+    status_type = models.CharField('Статус', max_length=30)
+
+    def __str__(self):
+        return self.status_type
+
+    class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'

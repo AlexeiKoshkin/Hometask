@@ -4,6 +4,8 @@ from cart.views import *
 
 urlpatterns = [
 
-    path('<int:pk>', AddBookToCart.as_view(),
+    path('add/<int:pk>', AddBookToCart.as_view(),
          name='add_book_to_cart'),
+    path('view/', CartView.as_view(),
+         name='view_cart')
 ]

@@ -24,7 +24,13 @@ class PublisherAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
 
 
+class OrderStatusAdmin(admin.ModelAdmin):
+    list_display = ('status_type',)
+    search_fields = ('status_type',)
+
+
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Serie, SerieAdmin)
 admin.site.register(models.Genre, GenreAdmin)
 admin.site.register(models.Publisher, PublisherAdmin)
+admin.site.register(models.OrderStatus, OrderStatusAdmin)

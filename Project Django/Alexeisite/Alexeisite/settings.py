@@ -45,6 +45,7 @@ MY_APPS = [
     'book',
     'crispy_forms',
     'cart',
+    'order',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS

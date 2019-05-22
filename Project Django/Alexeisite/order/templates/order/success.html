@@ -13,16 +13,37 @@
 </head>
 <body>
     <div class="container">
-        {% load crispy_forms_tags %}
-        <form action="" method="post">
-            <div class="form-group">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input type="hidden" name="next" value="{{ next }}">
-                <a href="{{ next }}" class="btn btn-info">Назад</a>
-                <button type="sumbit" class="btn btn-success btn-block">Добавить в корзину</button>
-            </div>
-        </form>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Книга</th>
+                <th scope="col">Кол-во</th>
+                <th scope="col">Цена за шт.</th>
+                <th scope="col">Цена всего</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in object.cart.books_in_cart.all %}
+                <tr>
+                    <td>{{ product.pk }}</td>
+                    <td>{{ product.book.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.book.price }}</td>
+                    <td>{{ product.price_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>Итого</td>
+                <td>{{ object.books_in_cart_count }}</td>
+                <td></td>
+                <td>{{ object.total_cart_price }}</td>
+            </tr>
+        </tfoot>
+        </table>
     </div>
 </body>
 </html>
