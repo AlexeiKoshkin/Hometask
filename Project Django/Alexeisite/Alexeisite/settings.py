@@ -46,9 +46,14 @@ MY_APPS = [
     'crispy_forms',
     'cart',
     'order',
+    'authen',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/authen/login'
+LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -67,7 +72,7 @@ ROOT_URLCONF = 'Alexeisite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
