@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Order List{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>ВСЕ ЗАКАЗЫ</h3>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Пользователь</th>
+                <th scope="col">Статус заказа</th>
+                <th scope="col">Количество книг</th>
+                <th scope="col">Цена всего</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.cart.user }}</td>
+                    <td>{{ object.status }}</td>
+                    <td>{{ object.cart.books_in_cart_count }}</td>
+                    <td>{{ object.cart.total_cart_price }}</td>
+                    <td><a href="{% url 'order_update' object.pk %}">Обновить</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

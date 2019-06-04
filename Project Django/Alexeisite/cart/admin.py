@@ -4,6 +4,7 @@ from .import models
 
 class CartAdmin(admin.ModelAdmin):
     list_display = (
+        '__str__',
         'user',
         'created_date',
         'update_date'
@@ -19,6 +20,7 @@ class BookInCartAdmin(admin.ModelAdmin):
         'created_date',
         'update_date'
     )
+    list_filter = ('cart',)
 
 
 admin.site.register(models.Cart, CartAdmin)

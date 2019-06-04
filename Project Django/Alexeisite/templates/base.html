@@ -33,15 +33,20 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Название книги" aria-label="Поиск" name="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
             </form>
-        </div>
-    </nav>
-    {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
                 Добро пожаловать, {{ user }}!
                 <a href="{% url 'log_out' %}?next={{ view.request.path }}" class="btn btn-primary ml-sm-2 mr-sm-2">Выйти</a>
                 {% endif %}
-    {% if user.is_anonymous %}
+            {% if user.is_anonymous %}
                 <a href="{% url 'log_in' %}?next={{ view.request.path }}" class="btn btn-primary ml-sm-2 mr-sm-2">Войти</a>
                 {% endif %}
+            {% if perms.books.edit_order %}
+                    <a href="{% url 'order_list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
+            {% endif %}
+            <a href="{% url 'view_cart' %}" class="btn btn-warning ml-sm-2">Моя корзина ({{ quantity }})</a>
+        </div>
+    </nav>
+    
     {% block content %}
 
     {% endblock %}

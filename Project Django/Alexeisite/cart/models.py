@@ -10,6 +10,7 @@ class Cart(models.Model):
         User,
         blank=True,
         null=True,
+        verbose_name="Пользователь",
         on_delete=models.PROTECT
     )
     created_date = models.DateTimeField(
@@ -24,7 +25,7 @@ class Cart(models.Model):
     )
 
     def __str__(self):
-        return "Корзина"
+        return "Корзина {} покупателя {}".format(self.pk, self.user)
 
     @property
     def books_in_cart_count(self):
@@ -54,6 +55,7 @@ class BookInCart(models.Model):
     )
     book = models.ForeignKey(
         Book,
+        verbose_name="Книга",
         on_delete=models.CASCADE
     )
     quantity = models.IntegerField(

@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from cart.models import Cart
 from reference.models import OrderStatus
 
@@ -8,12 +7,17 @@ class Order(models.Model):
     cart = models.ForeignKey(
         Cart,
         verbose_name="Корзина",
+        related_name="order_cart",
         on_delete=models.PROTECT
     )
     status = models.ForeignKey(
         OrderStatus,
         verbose_name="Статус заказа",
         on_delete=models.PROTECT
+    )
+    canceled = models.BooleanField(
+        "Отменен",
+        default=False
     )
     delivery_address = models.TextField(
         "Адрес доставки",

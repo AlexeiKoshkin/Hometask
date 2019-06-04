@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Order Success{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>ВАШ ЗАКАЗ:</h3>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Книга</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Цена за книгу</th>
+                <th scope="col">Цена всего</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in object.cart.books_in_cart.all %}
+                <tr>
+                    <td>{{ product.book.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.book.price }}</td>
+                    <td>{{ product.price_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Итого</td>
+                <td>{{ object.cart.books_in_cart_count }}</td>
+                <td></td>
+                <td>{{ object.cart.total_cart_price }}</td>
+            </tr>
+        </tfoot>
+        </table>
+        {% if object.status.pk == 1 %}
+        <a href="{% url 'order_canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
+        {% endif %}
+    </div>
+{% endblock %}
