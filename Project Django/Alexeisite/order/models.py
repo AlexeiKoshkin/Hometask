@@ -19,11 +19,12 @@ class Order(models.Model):
         "Отменен",
         default=False
     )
-    delivery_address = models.TextField(
+    delivery_address = models.CharField(
         "Адрес доставки",
         null=True,
         blank=True,
-        help_text="Минск, ул. Первая, 7-77"
+        help_text="Минск, ул. Первая, 7-77",
+        max_length=50
     )
     email = models.EmailField(
         verbose_name="Электронная почта",
@@ -36,10 +37,11 @@ class Order(models.Model):
         help_text="+375-29-111-11-11",
         max_length=17
     )
-    comments = models.TextField(
+    comments = models.CharField(
         verbose_name="Дополнительная информация",
         null=True,
         blank=True,
+        max_length=100
     )
     created_day = models.DateTimeField(
         "Дата внесения в корзину",

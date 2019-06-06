@@ -24,7 +24,7 @@
             </td>
             <td>{{object.name}}</td>
             <td>
-                <a href="{% url "add_book_to_cart" object.pk %}">Добавить в карзину</a>
+                <a href="{% url "add_book_to_cart" object.pk %}?next={{ view.request.path }}">Добавить в карзину</a>
             </td>
             <td>
                 <a href="{% url "book_detail_view" object.pk %}">Детали</a>
