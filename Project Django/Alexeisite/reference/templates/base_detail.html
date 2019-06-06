@@ -6,9 +6,9 @@
 
 {% block content %}
     <div class="container">
-        <a class="btn btn-primary btn-lg btn-block" {% block href %}{% endblock %}>Назад</a><br>
-        <table class="table table-striped table-sm table-bordered table-hover">
-            <thead class="thead-dark">
+        <h3>ДЕТАЛИ</h3>
+        <table class="table table-striped">
+            <thead>
                 {% block thead %}
                 
                 {% endblock %}
@@ -19,5 +19,6 @@
                 {% endblock %}
             </tbody>
         </table>
+        <a class="btn btn-info" {% block href %}{% endblock %}>Назад</a><br>
     </div>
 {% endblock %}

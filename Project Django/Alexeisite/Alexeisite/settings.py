@@ -25,7 +25,7 @@ SECRET_KEY = 'j@s)@qlz!u1glj^u9i9!(chz#5jx_rik^^w@qw$$c=5y(oghe4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['linkfoil.pythonanywhere.com']
+ALLOWED_HOSTS = ['linkfoil.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition

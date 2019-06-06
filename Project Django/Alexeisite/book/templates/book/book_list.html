@@ -1,38 +1,51 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Book List</title>
-</head>
-<body>
-    <form action="", method="get">
-        {{ form }}
-        <button type="submit">Поиск</button>
-    </form>
-    <a href="{% url 'book_create_view' %}">Создать новую книгу</a>
-    <table border="1">
-        <tr>
-            <th>ID</th><th>Название</th><th>№</th><th>Действия</th>
-        </tr>
-        {% for object in object_list %}
-        <tr>
-            <td>
-                <a href="{% url 'book_detail_view' object.pk %}">
-                {{ object.pk }}</a>
-            </td>
-            <td>{{object.name}}</td>
-            <td>
-                <a href="{% url "add_book_to_cart" object.pk %}?next={{ view.request.path }}">Добавить в карзину</a>
-            </td>
-            <td>
-                <a href="{% url "book_detail_view" object.pk %}">Детали</a>
-                <a href="{% url "book_update_view" object.pk %}">Обновить</a>
-                <a href="{% url "book_delete_view" object.pk %}">Удалить</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>СПИСОК КНИГ</h3>
+        {% load crispy_forms_tags %}
+        <form action="", method="get">
+            <div class="form-group">
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
+            </div>
+        </form>
+        <a class="btn btn-primary btn-block" href="{% url 'book_create_view' %}">Создать новую книгу</a><br>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Количество книг в наличии</th>
+                <th scope="col">Доступна для заказа</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td><a href="{% url 'book_detail_view' object.pk %}">{{ object.name }}</a></td>
+                    <td>{{ object.price }}</td>
+                    <td>{{ object.num_book }}</td>
+                    <td>{% if object.available %}
+                            <i class="fas fa-check-circle"></i>
+                        {% else %}
+                            <i class="fas fa-times-circle"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url "add_book_to_cart" object.pk %}?next={{ view.request.path }}"><i class="fas fa-cart-plus"></i></a>
+                        <a href="{% url "book_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+                        <a href="{% url "book_update_view" object.pk %}"><i class="fas fa-pen-square"></i></a>
+                        <a href="{% url "book_delete_view" object.pk %}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}
