@@ -14,7 +14,9 @@
                 <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
             </div>
         </form>
+        {% if perms.books.edit_content %}
         <a class="btn btn-primary btn-block" href="{% url 'book_create_view' %}">Создать новую книгу</a><br>
+        {% endif %}
         <table class="table table-striped">
         <thead>
             <tr>
@@ -40,8 +42,10 @@
                     <td>
                         <a href="{% url "add_book_to_cart" object.pk %}?next={{ view.request.path }}"><i class="fas fa-cart-plus"></i></a>
                         <a href="{% url "book_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+                        {% if perms.books.edit_content %}
                         <a href="{% url "book_update_view" object.pk %}"><i class="fas fa-pen-square"></i></a>
                         <a href="{% url "book_delete_view" object.pk %}"><i class="fas fa-trash-alt"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

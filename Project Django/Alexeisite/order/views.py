@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from .models import Order
 from .forms import CheckOutOrderForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class OrderCheckOutView(CreateView):
@@ -22,21 +23,23 @@ class OrderSuccessView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.object.cart.user.pk == self.request.user.pk:
+        if self.object.cart.user == None:
+            return context
+        elif self.object.cart.user.pk == self.request.user.pk:
             return context
 
 
-class OrderListView(ListView):
+class OrderListView(PermissionRequiredMixin, ListView):
     model = Order
     template_name = 'order/order_list.html'
-    #permission_required = 'books.edit_order'
+    permission_required = 'books.edit_order'
 
 
-class OrderUpdateView(UpdateView):
+class OrderUpdateView(PermissionRequiredMixin, UpdateView):
     model = Order
     template_name = 'order/order_update.html'
     fields = ['status']
-    #permission_required = 'books.edit_order'
+    permission_required = 'books.edit_order'
 
     def get_success_url(self):
         return reverse_lazy('order_list')
@@ -50,7 +53,7 @@ class OrderCanceledView(UpdateView):
     def get_success_url(self):
         self.object.canceled = True
         self.object.save()
-        return reverse_lazy('cart_user_list')
+        return reverse_lazy('order_user_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

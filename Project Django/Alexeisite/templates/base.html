@@ -19,6 +19,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'last_list_view' %}">Главная<span class="sr-only">(current)</span></a>
@@ -36,26 +37,40 @@
                     <a class="dropdown-item" href="{% url 'genre_list_view' %}">Жанры</a>
                     <a class="dropdown-item" href="{% url 'publisher_list_view' %}">Издательства</a>
                 </li>
+                <li class="nav-item">
+                     <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Название книги" aria-label="Поиск" name="search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                    </form>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Название книги" aria-label="Поиск" name="search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
-            </form>
+            
             {% if user.is_authenticated %}
-                <span class="navbar-text">
-                Добро пожаловать, {{ user }}!
-                </span>
-                <a href="{% url 'log_out' %}?next={{ view.request.path }}" class="btn btn-primary ml-sm-2 mr-sm-2">Выйти</a>
-                {% endif %}
-            {% if user.is_anonymous %}
-                <a href="{% url 'log_in' %}?next={{ view.request.path }}" class="btn btn-primary ml-sm-2 mr-sm-2">Войти</a>
-                {% endif %}
-            {% if perms.books.edit_order %}
-                    <a href="{% url 'order_list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
+                <div class="dropdown mr-sm-2">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'view_user' user.pk %}">Мой профиль</a>
+                            <a class="dropdown-item" href="{% url 'order_user_list' %}">Мои заказы</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'log_out' %}
+                            {% if logout_redirect %}?next={{ logout_redirect }}{% endif %}">Выйти</a>
+                        </div>
+                    </div>
             {% endif %}
-            <a href="{% url 'view_cart' %}" class="btn btn-warning ml-sm-2">Корзина ({{ quantity }})</a>
+
+            {% if user.is_anonymous %}
+                <a href="{% url 'create_user' %}" class="btn btn-primary mr-sm-2">Регистрация</a>
+                <a href="{% url 'log_in' %}?next={{ view.request.path }}" class="btn btn-primary ml-sm-2 mr-sm-2">Войти</a>
+            {% endif %}
+            {% if perms.books.edit_order %}
+                <a href="{% url 'order_list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
+            {% endif %}
+            <a href="{% url 'view_cart' %}" class="btn btn-warning ml-sm-2">Корзина</a>
         </div>
     </nav>
+
     <br></br>
     <br></br>
     {% block content %}

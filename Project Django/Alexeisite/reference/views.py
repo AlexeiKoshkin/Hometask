@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView
 from reference.models import Author, Serie, Genre, Publisher
 from reference.forms import *
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
@@ -103,10 +104,11 @@ class PublisherList(ListView):
         return context
 
 
-class AuthorCreate(CreateView):
+class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
     form_class = AuthorForm
     template_name = 'reference/create_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -117,10 +119,11 @@ class AuthorCreate(CreateView):
         return reverse_lazy('author_create_view')
 
 
-class SerieCreate(CreateView):
+class SerieCreate(PermissionRequiredMixin, CreateView):
     model = Serie
     form_class = SerieForm
     template_name = 'reference/create_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -131,10 +134,11 @@ class SerieCreate(CreateView):
         return reverse_lazy('serie_create_view')
 
 
-class GenreCreate(CreateView):
+class GenreCreate(PermissionRequiredMixin, CreateView):
     model = Genre
     form_class = GenreForm
     template_name = 'reference/create_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -145,10 +149,11 @@ class GenreCreate(CreateView):
         return reverse_lazy('genre_create_view')
 
 
-class PublisherCreate(CreateView):
+class PublisherCreate(PermissionRequiredMixin, CreateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'reference/create_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -159,10 +164,11 @@ class PublisherCreate(CreateView):
         return reverse_lazy('publisher_create_view')
 
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(PermissionRequiredMixin, UpdateView):
     model = Author
     form_class = AuthorForm
     template_name = 'reference/update_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -171,10 +177,11 @@ class AuthorUpdate(UpdateView):
         return reverse_lazy('author_list_view')
 
 
-class SerieUpdate(UpdateView):
+class SerieUpdate(PermissionRequiredMixin, UpdateView):
     model = Serie
     form_class = SerieForm
     template_name = 'reference/update_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -183,10 +190,11 @@ class SerieUpdate(UpdateView):
         return reverse_lazy('serie_list_view')
 
 
-class GenreUpdate(UpdateView):
+class GenreUpdate(PermissionRequiredMixin, UpdateView):
     model = Genre
     form_class = GenreForm
     template_name = 'reference/update_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -195,10 +203,11 @@ class GenreUpdate(UpdateView):
         return reverse_lazy('genre_list_view')
 
 
-class PublisherUpdate(UpdateView):
+class PublisherUpdate(PermissionRequiredMixin, UpdateView):
     model = Publisher
     form_class = PublisherForm
     template_name = 'reference/update_form.html'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -207,25 +216,29 @@ class PublisherUpdate(UpdateView):
         return reverse_lazy('publisher_list_view')
 
 
-class AuthorDelete(DeleteView):
+class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
     success_url = reverse_lazy('author_list_view')
     template_name = 'reference/delete_form.html'
+    permission_required = 'books.edit_content'
 
 
-class SerieDelete(DeleteView):
+class SerieDelete(PermissionRequiredMixin, DeleteView):
     model = Serie
     success_url = reverse_lazy('serie_list_view')
     template_name = 'reference/delete_form.html'
+    permission_required = 'books.edit_content'
 
 
-class GenreDelete(DeleteView):
+class GenreDelete(PermissionRequiredMixin, DeleteView):
     model = Genre
     success_url = reverse_lazy('genre_list_view')
     template_name = 'reference/delete_form.html'
+    permission_required = 'books.edit_content'
 
 
-class PublisherDelete(DeleteView):
+class PublisherDelete(PermissionRequiredMixin, DeleteView):
     model = Publisher
     success_url = reverse_lazy('publisher_list_view')
     template_name = 'reference/delete_form.html'
+    permission_required = 'books.edit_content'

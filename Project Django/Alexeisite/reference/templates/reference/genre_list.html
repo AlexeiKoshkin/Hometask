@@ -20,8 +20,10 @@
     </td>
     <td>
         <a href="{% url "genre_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+        {% if perms.books.edit_content %}
         <a href="{% url "genre_update_view" object.pk %}"><i class="fas fa-pen-square"></i></a>
         <a href="{% url "genre_delete_view" object.pk %}"><i class="fas fa-trash-alt"></i></a>
+        {% endif %}
     </td>
 </tr>
 {% endfor %}

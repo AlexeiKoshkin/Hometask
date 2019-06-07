@@ -28,7 +28,7 @@
                     <td>
                         <a href="{% url "book_detail_view" product.book.pk %}"><i class="fas fa-info-circle"></i></a>
                         <a href="{% url "add_book_to_cart" product.book.pk %}?next={{ view.request.path }}"><i class="fas fa-pen-square"></i></a>
-                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                        <a href="{% url "delete_book_from_cart" product.pk %}?next={{ view.request.path }}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
             {% endfor %}

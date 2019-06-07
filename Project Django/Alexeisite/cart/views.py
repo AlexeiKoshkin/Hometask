@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from book.models import Book
 from cart.models import BookInCart, Cart, User
@@ -8,6 +9,7 @@ from .forms import AddBookForm
 from django.urls import reverse_lazy
 from reference.models import OrderStatus
 from order.forms import CheckOutOrderForm
+
 
 new_order_status = OrderStatus.objects.get(pk=1)
 
@@ -17,7 +19,7 @@ class AddBookToCart(UpdateView):
     form_class = AddBookForm
     template_name = 'cart/add_book.html'
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         cart_id = self.request.session.get('cart_id')
         if self.request.user.is_anonymous:
             user = None
@@ -57,7 +59,7 @@ class CartView(DetailView):
     model = Cart
     template_name = 'cart/view_cart.html'
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         cart_id = self.request.session.get('cart_id')
         if self.request.user.is_anonymous:
             user = None
@@ -78,3 +80,22 @@ class CartView(DetailView):
         checkout_form.fields['status'].initial = new_order_status
         context['form'] = checkout_form
         return context
+
+
+class DeleteBookFromCart(DeleteView):
+    model = BookInCart
+    template_name = 'cart/delete_book.html'
+
+    def get_success_url(self):
+        return reverse_lazy('view_cart')
+
+
+class OrderUserListView(ListView):
+    model = Cart
+    template_name = 'cart/order_user_list.html'
+    login_url = '/authen/login'
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        current_user = self.request.user
+        return qs.filter(user=current_user)

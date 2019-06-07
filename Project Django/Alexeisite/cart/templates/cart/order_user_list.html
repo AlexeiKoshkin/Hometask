@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Order User List{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3>ВАШИ ЗАКАЗЫ</h3>
+        {% if object_list %}
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Дата создания заказа</th>
+                <th scope="col">Статус заказа</th>
+                <th scope="col">Цена всего</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                {% if object.order_cart.all %}
+                    <tr>
+                        {% for product in object.order_cart.all %}
+                            <td>{{ product.created_day|date:"j E Y, G:i" }}</td>
+                            <td>{{ product.status }}</td>
+                            <td>{{ product.cart.total_cart_price }}</td>
+                            <td>
+                                <a href="{% url 'order_success' product.pk %}"><i class="fas fa-info-circle"></i></a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+        </table>
+        {% else %}
+            <h3 align="center">У Вас еще нет заказов!</h3>
+        {% endif %}
+    </div>
+{% endblock %}

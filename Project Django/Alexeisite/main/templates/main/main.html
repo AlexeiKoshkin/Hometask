@@ -18,7 +18,8 @@
                             <p class="card-text">{{ object.price }} BYN</p>
                         </div>
                         <div class="card-footer">
-                            <a href="{% url 'book_detail_view' object.pk %}" class="btn btn-primary">Детали</a>
+                            <a href="{% url "book_detail_view" object.pk %}"><i class="fas fa-info-circle"></i></a>
+                            <a href="{% url "add_book_to_cart" object.pk %}?next={{ view.request.path }}"><i class="fas fa-cart-plus"></i></a>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Order Update{% endblock %}
+{% block title %}Base List{% endblock %}
 
 {% block form %}{% endblock %}
 
@@ -14,7 +14,9 @@
                 <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
             </div>
         </form>
+        {% if perms.books.edit_content %}
         <a class="btn btn-primary btn-block" {% block href %}{% endblock %}</a><br>
+        {% endif %}
         <table class="table table-striped">
             <thead>
                 {% block thead %}

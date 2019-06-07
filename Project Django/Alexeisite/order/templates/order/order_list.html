@@ -12,6 +12,7 @@
             <tr>
                 <th scope="col">Пользователь</th>
                 <th scope="col">Статус заказа</th>
+                <th scope="col">Отмена покупателем</th>
                 <th scope="col">Количество книг</th>
                 <th scope="col">Цена всего</th>
                 <th scope="col">Действие</th>
@@ -22,9 +23,10 @@
                 <tr>
                     <td>{{ object.cart.user }}</td>
                     <td>{{ object.status }}</td>
+                    <td>{{ object.canceled }}</td>
                     <td>{{ object.cart.books_in_cart_count }}</td>
                     <td>{{ object.cart.total_cart_price }}</td>
-                    <td><a href="{% url 'order_update' object.pk %}">Обновить</a></td>
+                    <td><a href="{% url 'order_update' object.pk %}"><i class="fas fa-info-circle"></i></a></td>
                 </tr>
             {% endfor %}
         </tbody>
